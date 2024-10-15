@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/components/HomeScreen';
+import Details from './src/components/Details';
+import Configuration from './src/components/Configuration';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Nav = createNativeStackNavigator();
+
+function App() {
+    return (
+
+        <NavigationContainer>
+            <Nav.Navigator initialRouteName='Home' >
+                <Nav.Screen name='Home' component={HomeScreen} options={{
+                    title: 'Beacon App',
+                    headerStyle: {
+                        backgroundColor: 'cyan',
+                    },
+                    headerTintColor: 'black',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }} />
+                <Nav.Screen name='Details' component={Details} />
+                <Nav.Screen name='Configuration' component={Configuration} />
+            </Nav.Navigator>
+        </NavigationContainer>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
